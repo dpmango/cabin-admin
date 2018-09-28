@@ -1,0 +1,57 @@
+.header
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  &__wrapper
+    display: flex
+    align-items: center
+    padding: 20px 0 10px
+
+  &__logo
+    flex: 0 0 auto
+
+  &__search
+    margin-left: auto
+    max-width: 270px
+    margin-right: 35px
+
+
+  &__notifications
+    padding: 10px 30px
+    border-left: 1px solid #979797
+    border-right: 1px solid #979797
+
+  &__user
+    margin-left: 35px
+
+
+.header-search
+  position: relative
+  &__icon
+    position: absolute
+    top: 50%
+    transform: translateY(-50%)
+    left: 10px
+    font-size: 0
+    .ico
+      font-size: 16px
+
+  &__input
+    -webkit-apperance: none
+    display: block
+    font-family: $defaultFamily
+    width: 100%
+    padding: 0px 10px 0px 35px
+    font-size: 14px
+    line-height: 2.14
+    border: 0
+    border-bottom: 1px solid #979797
+    &::placeholder
+
+
+.header-user
+  display: flex
+  align-items: center
+  &__toggle
+    margin-left: 5px

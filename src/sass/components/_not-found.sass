@@ -1,0 +1,31 @@
+.not-found
+  &__wrapper
+    min-height: calc(100vh - 120px)
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    text-align: center
+    padding: 120px 0 80px
+  &__title
+    margin-bottom: 0
+  &__desc
+    // text-align: center
+
+  &__image
+    // size: 370px 270px
+    min-height: 270px
+    display: flex
+    align-items: center
+    // background: $lightBg
+    // margin-bottom: 35px
+    color: #FFFFFF
+    text-align: center
+    text-shadow: 0 0 30px rgba(0,0,0,0.07)
+    font-size: 228px
+    line-height: .7
+
++r($tablet)
+  .not-found
+    &__image
+      size: 270px 200px
