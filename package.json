@@ -23,6 +23,7 @@
     "gulp-svgstore": "^7.0.0",
     "gulp-util": "^3.0.8",
     "gulp.spritesmith": "^6.9.0",
+    "moment": "^2.22.2",
     "postcss-animation": "^0.0.12",
     "postcss-flexbugs-fixes": "^4.1.0",
     "postcss-inline-svg": "^3.1.1",
@@ -49,6 +50,7 @@
     "save": "^2.3.2",
     "svg4everybody": "^2.1.9",
     "through2": "^2.0.3",
+    "underscore": "^1.9.1",
     "viewport-units-buggyfill": "^0.6.2",
     "vinyl-buffer": "^1.0.1"
   },

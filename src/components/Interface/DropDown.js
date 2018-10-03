@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import ClickOutside from 'react-click-outside';
 import SvgIcon from 'components/Helpers/SvgIcon';
 
