@@ -1,0 +1,42 @@
+.company
+  &__header
+    margin-top: 20px
+    padding-top: 50px
+    background: $lightBg
+  &__tab
+    display: none
+    &.is-active
+      display: block
+
+// header
+.company-header
+  &__info
+    display: flex
+    align-items: center
+  &__name
+    font-size: 30px
+    line-height: 1
+    font-weight: 500
+  &__status
+    margin-left: 28px
+  &__tabs
+    display: flex
+    margin-top: 50px
+  &__tab
+    padding: 15px
+    font-size: 16px
+    // font-weight: 500
+    min-width: 210px
+    margin-right: 20px
+    text-align: center
+    cursor: pointer
+    border-top-left-radius: 3px
+    border-top-right-radius: 3px
+    transition: .25s $ease
+    &:last-child
+      margin-right: 0
+    &.is-active
+      background: white
+      font-weight: 500
+    &:hover
+      background: rgba(white, .5)

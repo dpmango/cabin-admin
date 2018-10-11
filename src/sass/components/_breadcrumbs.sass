@@ -1,0 +1,31 @@
+.breadcrumbs
+  // compensate page wrap difference
+  margin-top: -15px
+  &__list
+    margin: 0
+    padding: 0
+    list-style: none
+    display: flex
+    align-items: center
+    flex-wrap: wrap
+    li
+      display: flex
+      align-items: center
+      position: relative
+      font-size: 12px
+      font-weight: 500
+      color: $fontColorGray
+      .ico
+        font-size: 11px
+        margin-left: 8px
+        margin-right: 8px
+        transform: translateY(-1px)
+      a
+        color: $colorBlue
+        transition: .25s $ease
+        &:hover
+          color: $colorBlueHover
+
+      &:last-child
+        &::after
+          display: none

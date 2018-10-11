@@ -1,19 +1,8 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import CompanyStatus from 'components/Shared/CompanyStatus';
 
 class Tbody extends Component{
-  renderCellText = (el) => {
-    if ( typeof(el) === "object" ){
-      if ( el.isActive ){
-        return <span className="badge badge--green">Active</span>
-      } else if ( el.isPending ){
-        return <span className="badge badge--red">Pending</span>
-      } else if ( el.isInactive) {
-        return <span className="badge badge--gray">Inactive</span>
-      }
-    } else {
-      return el
-    }
-  }
 
   render(){
     const { rows } = this.props
@@ -21,17 +10,18 @@ class Tbody extends Component{
     return(
       <div className="table__body">
         {[1,2,3].map(a => (rows.map(x => (
-          <div
+          <Link
+            to={`/company/${x.id}`}
             className="table__row"
             key={x.id}>
             {x.cells.map(y => (
               <td
                 className="table__cell"
                 key={y.id}>
-                {this.renderCellText(y.text)}
+                <CompanyStatus el={y.text} />
               </td>
             ))}
-          </div>
+          </Link>
         ))))}
       </div>
     )
