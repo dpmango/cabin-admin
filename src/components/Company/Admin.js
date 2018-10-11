@@ -15,7 +15,10 @@ class Admin extends Component{
       name: "ACME Company LTE",
       status: "pending",
       fields: {
-
+        overview: {
+          shortName: "",
+          UEN: ""
+        }
       }
     }
   }
@@ -34,6 +37,20 @@ class Admin extends Component{
     })
   }
 
+  // child component change functions
+  handleChange = (name, value, cat) => {
+
+    this.setState({...this.state,
+      fields: {...this.state.fields,
+        [cat]: {
+          ...this.state.fields[cat],
+          [name]: value
+        }
+      }
+    })
+
+  }
+
   render(){
     const {
       state: {name, status, activeTab},
@@ -46,7 +63,10 @@ class Admin extends Component{
           id: 1,
           name: "Overview"
         },
-        component: Overview
+        component: <Overview
+          shortName={this.state.fields.overview.shortName}
+          UEN={this.state.fields.overview.UEN}
+          onInputChange={this.handleChange} />
       },
       {
         nav: {
@@ -87,9 +107,13 @@ class Admin extends Component{
           <div className="company__tabs">
             {tabs.map(tab => (
               <Fragment
-                activeTab={activeTab}
                 key={tab.nav.id}>
-                {tab.component}
+                <div
+                  className={"company__tab" + (activeTab === tab.nav.id ? " is-active" : "")}>
+                  <div className="container">
+                    {tab.component}
+                  </div>
+                </div>
               </Fragment>
             ))}
           </div>
