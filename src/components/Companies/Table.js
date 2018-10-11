@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import moment from 'moment';
-import { groupBy, map } from 'underscore';
-import api from 'services/Api';
+import { groupBy } from 'underscore';
+// map
+
+// import api from 'services/Api';
 import tableDataBase from 'store/tableDataBase';
 import Thead from './Thead';
 import Tbody from './Tbody';
@@ -34,9 +36,9 @@ class Table extends Component{
     let sortedData = this.state.tableDataBody;
 
     if ( sortDirDESC ){
-      sortedData = sortedData.sort( (a,b) => parseInt(b[index]) - parseInt(a[index]) ) // desc
+      sortedData = sortedData.sort( (a,b) => parseInt(b[index], 10) - parseInt(a[index], 10) ) // desc
     } else {
-      sortedData = sortedData.sort( (a,b) => parseInt(a[index]) - parseInt(b[index]) ) // asc
+      sortedData = sortedData.sort( (a,b) => parseInt(a[index], 10) - parseInt(b[index], 10) ) // asc
     }
 
     this.setState({

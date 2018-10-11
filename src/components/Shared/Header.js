@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 import Search from './Header/Search';
 import Notifications from './Header/Notifications';
 import User from './Header/User';
@@ -10,9 +11,11 @@ class Header extends Component {
       <div className="header">
         <div className="container">
           <div className="header__wrapper">
-            <div className="header__logo">
+            <Link
+              to="/companies"
+              className="header__logo">
               <i className="icon icon-cabin-logo"></i>
-            </div>
+            </Link>
             <Search />
             <Notifications />
             <User />

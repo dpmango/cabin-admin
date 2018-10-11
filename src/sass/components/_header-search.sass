@@ -1,0 +1,106 @@
+// Header search
+.header-search
+  position: relative
+  &__icon
+    position: absolute
+    top: 47%
+    transform: translateY(-50%)
+    left: 10px
+    font-size: 0
+    color: rgba($fontColorGray, .5)
+    .ico
+      font-size: 15px
+
+  &__input
+    -webkit-apperance: none
+    display: block
+    font-family: $systemFamily
+    width: 100%
+    color: $fontColorGray
+    padding: 0px 10px 2px 35px
+    font-size: 14px
+    line-height: 2.14
+    border: 0
+    border-bottom: 1px solid rgba(#979797, .5)
+    &::placeholder
+      color: rgba($fontColorGray, .5)
+
+  &__suggestions
+    position: absolute
+    top: 32px
+    right: 0
+    left: 0
+    background: #FFFFFF
+    box-shadow: 0 0 30px 0 rgba(0,0,0,0.05)
+    border: 1px solid $borderColor50
+    border-bottom-left-radius: 3px
+    border-bottom-right-radius: 3px
+    max-height: calc(100vh - 60px - 30px)
+    overflow-y: scroll
+
+  &__suggestion
+    display: block
+    width: 100%
+    font-size: 13px
+    font-weight: 500
+    color: $fontColorGray
+    padding: 22px 15px
+    transition: .25s $ease
+    &:hover
+      color: white
+      background-color: $colorBlue
+
+  &__advanced-toggle
+    padding: 22px 15px
+    display: flex
+    align-items: center
+    font-size: 0
+    cursor: pointer
+    color: rgba($fontColorGray, .5)
+    transition: .25s $ease
+    .ico
+      font-size: 13px
+    span
+      display: inline-block
+      font-size: 13px
+      margin-left: 10px
+    &:hover
+      color: $fontColorGray
+
+  &__advanced
+    position: absolute
+    top: 32px
+    right: 0
+    // left: 0
+    min-width: 435px
+    padding: 25px
+    background: #FFFFFF
+    box-shadow: 0 0 30px 0 rgba(0,0,0,0.05)
+    border: 1px solid $borderColor50
+    border-bottom-left-radius: 3px
+    border-bottom-right-radius: 3px
+
+// Advanced search
+.adv-search
+  &__top
+
+  &__row
+    display: flex
+    margin-left: -10px
+    margin-right: -10px
+
+  &__col
+    flex: 0 1 50%
+    padding: 10px
+    &-title
+      // almost same as group label
+      color: $fontColorGray
+      font-size: 12px
+      font-weight: 500
+      min-height: 12px
+      margin-bottom: 8px
+
+  &__buttons
+    margin-top: 35px
+    display: flex
+    justify-content: space-between

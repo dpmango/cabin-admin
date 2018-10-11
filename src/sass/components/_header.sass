@@ -15,45 +15,49 @@
 
   &__search
     margin-left: auto
+    width: 100%
     max-width: 270px
     margin-right: 35px
 
 
   &__notifications
-    padding: 10px 30px
-    border-left: 1px solid #979797
-    border-right: 1px solid #979797
+    padding: 9px 30px 7px
+    border-left: 1px solid $borderColor50
+    border-right: 1px solid $borderColor50
 
   &__user
     margin-left: 35px
 
 
-.header-search
-  position: relative
-  &__icon
-    position: absolute
-    top: 50%
-    transform: translateY(-50%)
-    left: 10px
-    font-size: 0
-    .ico
-      font-size: 16px
 
-  &__input
-    -webkit-apperance: none
-    display: block
-    font-family: $defaultFamily
-    width: 100%
-    padding: 0px 10px 0px 35px
-    font-size: 14px
-    line-height: 2.14
-    border: 0
-    border-bottom: 1px solid #979797
-    &::placeholder
-
-
-.header-user
+.header-notifications
   display: flex
   align-items: center
+  cursor: pointer
+  &__icon
+    color: $colorRed
+    font-size: 16px
+  &__counter
+    color: $colorRed
+    font-size: 13px
+    margin-left: 12px
+
+.header-user
+  position: relative
+  display: flex
+  min-height: 40px
+  .avatar
+    position: absolute
+    top: 0
+    left: 0
+    pointer-events: none
+    user-select: none
   &__toggle
-    margin-left: 5px
+    // avatar offset
+    padding-left: 50px
+    display: flex
+    flex-direction: column
+    justify-content: center
+    font-size: 5px
+    cursor: pointer
+    color: $fontColorGray

@@ -4,7 +4,7 @@ class Tbody extends Component{
   renderCellText = (el) => {
     if ( typeof(el) === "object" ){
       if ( el.isActive ){
-        return <span class="badge badge--green">Active</span>
+        return <span className="badge badge--green">Active</span>
       } else if ( el.isPending ){
         return <span className="badge badge--red">Pending</span>
       } else if ( el.isInactive) {
@@ -14,7 +14,7 @@ class Tbody extends Component{
       return el
     }
   }
-  
+
   render(){
     const { rows } = this.props
 

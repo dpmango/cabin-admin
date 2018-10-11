@@ -33,7 +33,7 @@ class Dropdown extends Component{
   render(){
     const {
       state: { opened },
-      props: { extraClass }
+      props: { extraClass, toggleComponent }
     } = this
 
     return(
@@ -41,8 +41,7 @@ class Dropdown extends Component{
         onClick={this.clickHandler}
         onClickOutside={this.hide}
         className={(extraClass ? extraClass : "") + " dropdown" + (opened ? " is-active" : "")}>
-        <SvgIcon
-          name="check" />
+        {toggleComponent || <SvgIcon name="dropdown-arrow" />}
         <div
           onClick={this.preventClickAbove}
           className="dropdown__hidden">
