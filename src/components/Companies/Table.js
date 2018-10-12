@@ -21,7 +21,11 @@ class Table extends Component{
   componentDidMount(){
 
     let respDataBody = tableDataBase.tbody
-    respDataBody.forEach(x => x[0] = moment(x[0]) ) // convert to moment
+    respDataBody.forEach(x => x.cells.forEach(y => {
+      if ( y.id === 3 || y.id === 4 || y.id === 5 ){
+        y.text = moment(y.text, "DD/MM/YYYY") // convert timestamps to moment (comparable obj)
+      }
+    }))
 
     setTimeout( () => {
       this.setState({
@@ -32,14 +36,58 @@ class Table extends Component{
 
   }
 
-  sortData = (index, sortDirDESC) => {
-    let sortedData = this.state.tableDataBody;
-
-    if ( sortDirDESC ){
-      sortedData = sortedData.sort( (a,b) => parseInt(b[index], 10) - parseInt(a[index], 10) ) // desc
+  // DATA SORTING FUNCTIONS
+  getComparableValue = (cell) => {
+    const type = typeof(cell);
+    if ( type === "number" ){
+      return parseInt(cell, 10)
+    } else if ( type === "object" ){
+      if ( cell._isAMomentObject ){
+        return parseInt(cell.format('YYYY-MM-DD'), 10) // sorting format
+      } else {
+        if ( cell.isActive ) return 1
+        if ( cell.isPending ) return 2
+        if ( cell.isInactive ) return 3
+      }
     } else {
-      sortedData = sortedData.sort( (a,b) => parseInt(a[index], 10) - parseInt(b[index], 10) ) // asc
+      return cell
     }
+  }
+
+  // switch determines comprasion rules (plus, minus, greater, smaller)
+  sortingSwitch = (a, b, isString, directionDESC) => {
+    // sorting rules for the number (including moment dates and objects)
+    if ( !isString ){
+      if ( directionDESC ){
+        return this.getComparableValue(b) - this.getComparableValue(a)
+      } else {
+        return this.getComparableValue(a) - this.getComparableValue(b)
+      }
+
+    // sorting rules for the string
+    } else if ( isString ){
+      if ( directionDESC ){
+        return this.getComparableValue(b) < this.getComparableValue(a)
+      } else {
+        return this.getComparableValue(b) > this.getComparableValue(a)
+      }
+    }
+  }
+
+  // triggered from THEAD - get indexes and direction
+  sortData = (id, sortDirDESC) => {
+    let sortedData = this.state.tableDataBody;
+    let index = id - 1;
+    let isString = typeof(sortedData[0].cells[index].text) === "string"
+
+    console.log(isString)
+
+    sortedData = sortedData.sort( (a,b) => this.sortingSwitch(
+      a.cells[index].text,
+      b.cells[index].text,
+      isString,
+      sortDirDESC
+    ) )
 
     this.setState({
       tableDataBody: sortedData

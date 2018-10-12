@@ -3,55 +3,55 @@ const tableDataBase = {
     {
       id: 1,
       name: 'Company name',
-      icon: '',
+      icon: 't-cname',
       sortable: true
     },
     {
       id: 2,
       name: 'UEN',
-      icon: '',
+      icon: 't-uen',
       sortable: false
     },
     {
       id: 3,
       name: 'Next FYE',
-      icon: '',
+      icon: 't-clock',
       sortable: true
     },
     {
       id: 4,
       name: 'Next AGM',
-      icon: '',
+      icon: 't-clock',
       sortable: true
     },
     {
       id: 5,
       name: 'Renewal',
-      icon: '',
+      icon: 't-clock',
       sortable: true
     },
     {
       id: 6,
       name: 'Corp sec',
-      icon: '',
+      icon: 't-user',
       sortable: false
     },
     {
       id: 7,
       name: 'Accounting',
-      icon: '',
+      icon: 't-calendar',
       sortable: false
     },
     {
       id: 8,
       name: 'Status',
-      icon: '',
+      icon: 't-status',
       sortable: true
     },
     {
       id: 9,
       name: 'Action needed',
-      icon: '',
+      icon: 't-pencil',
       sortable: false
     }
   ],
@@ -63,16 +63,16 @@ const tableDataBase = {
           id: 1, text: 'ACME Company LTE'
         },
         {
-          id: 2, text: "01234567"
+          id: 2, text: "012341567"
         },
         {
           id: 3, text: "27/03/2017"
         },
         {
-          id: 4, text: "27/03/2017"
+          id: 4, text: "27/05/2017"
         },
         {
-          id: 5, text: "27/03/2017"
+          id: 5, text: "27/03/2018"
         },
         {
           id: 6, text: "Yes"
@@ -95,21 +95,22 @@ const tableDataBase = {
     },
     {
       id: 2,
+      isSeekingAttention: true,
       cells: [
         {
-          id: 1, text: 'ACME Company LTE'
+          id: 1, text: 'BCME Company LTE'
         },
         {
-          id: 2, text: "01234567"
+          id: 2, text: "012342567"
         },
         {
-          id: 3, text: "27/03/2017"
+          id: 3, text: "17/03/2017"
         },
         {
-          id: 4, text: "27/03/2017"
+          id: 4, text: "15/03/2017"
         },
         {
-          id: 5, text: "27/03/2017"
+          id: 5, text: "07/03/2019"
         },
         {
           id: 6, text: "Yes"
@@ -126,7 +127,7 @@ const tableDataBase = {
           }
         },
         {
-          id: 9, text: "Company verification"
+          id: 9, text: "Stakeholder verification"
         }
       ]
     },
@@ -134,25 +135,25 @@ const tableDataBase = {
       id: 3,
       cells: [
         {
-          id: 1, text: 'ACME Company LTE'
+          id: 1, text: 'CCME Company LTE'
         },
         {
-          id: 2, text: "01234567"
+          id: 2, text: "012343567"
         },
         {
-          id: 3, text: "27/03/2017"
+          id: 3, text: "22/03/2013"
         },
         {
-          id: 4, text: "27/03/2017"
+          id: 4, text: "29/07/2015"
         },
         {
-          id: 5, text: "27/03/2017"
+          id: 5, text: "03/05/2017"
         },
         {
-          id: 6, text: "Yes"
+          id: 6, text: "No"
         },
         {
-          id: 7, text: "Monthly"
+          id: 7, text: "Yearly"
         },
         {
           id: 8,
@@ -171,10 +172,10 @@ const tableDataBase = {
       id: 4,
       cells: [
         {
-          id: 1, text: 'ACME Company LTE'
+          id: 1, text: 'DCME Company LTE'
         },
         {
-          id: 2, text: "01234567"
+          id: 2, text: "012344567"
         },
         {
           id: 3, text: "27/03/2017"

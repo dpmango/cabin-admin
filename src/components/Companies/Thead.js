@@ -5,26 +5,26 @@ class Thead extends Component{
   constructor(){
     super();
     this.state = {
-      activeSortingCol: 0,
-      sortDirDESC: false
+      activeSortingCol: null,
+      sortDirDESC: true
     }
   }
 
-  sortCollumn = (index) => {
+  sortCollumn = (id) => {
     const { sortDirDESC, activeSortingCol } = this.state;
 
     let sortDir = sortDirDESC;
 
     // double click change sorting direction
-    if ( activeSortingCol === index ){
+    if ( activeSortingCol === id ){
       sortDir = !sortDir
     }
     this.setState({
-      activeSortingCol: index,
+      activeSortingCol: id,
       sortDirDESC: sortDir
     })
 
-    this.props.sortData(index, sortDir)
+    this.props.sortData(id, sortDir)
   }
 
   render(){
@@ -36,16 +36,21 @@ class Thead extends Component{
         <div className="table__row">
           {rows.map(x => (
             <div
-              className={"table__cell " + (activeSortingCol === x.id ? "is-active" : "") + (sortDirDESC ? " is-sorting-desc": "")}
-              onClick={this.sortCollumn.bind(this, x.id)}
+              className={"table__cell" +
+              (x.sortable ? " is-sortable" : "") +
+              (activeSortingCol === x.id ? " is-active" : "") +
+              (sortDirDESC ? " is-sorting-desc": "")}
+              onClick={x.sortable ? this.sortCollumn.bind(this, x.id) : null}
               key={x.id}>
               {x.icon &&
-                <SvgIcon name={x.icon ? x.icon : "check"} />
+                <div className="table__cell-icon">
+                  <SvgIcon name={x.icon} />
+                </div>
               }
               {x.name}
               {x.sortable &&
                 <div className="table__caret">
-                  <SvgIcon name="check" />
+                  <SvgIcon name="dropdown-arrow" />
                 </div>
               }
             </div>

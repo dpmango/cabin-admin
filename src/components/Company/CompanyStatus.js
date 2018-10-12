@@ -12,6 +12,7 @@ class CompanyStatus extends Component {
       } else if ( el.isInactive) {
         return <span className="badge badge--gray">Inactive</span>
       }
+
     } else {
       return el
     }

@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {Link} from 'react-router-dom';
 import CompanyStatus from 'components/Company/CompanyStatus';
+import moment from 'moment';
 
 class Tbody extends Component{
 
@@ -9,20 +10,25 @@ class Tbody extends Component{
 
     return(
       <div className="table__body">
-        {[1,2,3].map(a => (rows.map(x => (
+        {rows.map(x => (
           <Link
             to={`/company/${x.id}`}
-            className="table__row"
+            className={"table__row" +
+            (x.isSeekingAttention ? " is-seeking-attention" : "")}
             key={x.id}>
             {x.cells.map(y => (
-              <td
+              <div
                 className="table__cell"
                 key={y.id}>
-                <CompanyStatus el={y.text} />
-              </td>
+                { y.text._isAMomentObject ?
+                  <Fragment>{y.text.format("DD/MM/YYYY")}</Fragment>
+                  :
+                  <CompanyStatus el={y.text} />
+                }
+              </div>
             ))}
           </Link>
-        ))))}
+        ))}
       </div>
     )
   }
