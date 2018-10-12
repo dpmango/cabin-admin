@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import CompanyHeader from './CompanyHeader';
 import BreadCrumbs from './BreadCrumbs';
 import Overview from './Tabs/Overview';
@@ -17,13 +17,31 @@ class Admin extends Component{
       overview: {
         shortName: "",
         UEN: "",
-        corporateSecretary: ""
+        corporateSecretary: "",
+        accountingType: "",
+        secretaryName: "",
+        secretaryid: "",
+        status: "",
+        actionNeeded: "",
+        notes: "",
+        addressLine1: "",
+        addressLine2: "",
+        addressPostal: "",
+        representativeName: "",
+        representativeId: "",
+        representativeDesignation: "",
+        representativeEmail: "",
+        representativePhone: ""
       }
     }
   }
 
   componentDidMount(){
     this.getCompanyData();
+  }
+
+  componentDidUpdate(){
+    // console.log('admin updated', this.state)
   }
 
   getCompanyData = () => {
@@ -55,16 +73,23 @@ class Admin extends Component{
   //   })
   // }
 
+  saveForm = () => {
+    // TODO - some API things ?
+  }
+
   render(){
     const {
       state: {name, status, activeTab},
       props: {companyId}
     } = this;
 
-    const defaultComponentProps = {
+
+    const defaultComponentProps = (group) => ({
+      onFormSave: this.saveForm,
       onInputChange: this.handleChange,
-      onSelectChange: this.handleChange
-    }
+      onSelectChange: this.handleChange,
+      fields: this.state[group]
+    })
 
     const tabs = [
       {
@@ -72,11 +97,7 @@ class Admin extends Component{
           id: 1,
           name: "Overview"
         },
-        component: <Overview
-          {...defaultComponentProps}
-          shortName={this.state.overview.shortName}
-          UEN={this.state.overview.UEN}
-          corporateSecretary={this.state.overview.corporateSecretary} />
+        component: <Overview {...defaultComponentProps("overview")} />
       },
       {
         nav: {
@@ -102,32 +123,27 @@ class Admin extends Component{
     ]
 
     return(
-      <div className="page-wrap">
-        <div className="company">
-          <BreadCrumbs
-            crumbs={[{
-              name: name
-            }]}/>
-          <CompanyHeader
-            name={name}
-            status={status}
-            activeTab={activeTab}
-            tabs={tabs.map(x => x.nav)}
-            onTabSelected={this.changeTab}/>
-          <div className="company__tabs">
-            {tabs.map(tab => (
-              <Fragment
-                key={tab.nav.id}>
-                <div
-                  className={"company__tab" + (activeTab === tab.nav.id ? " is-active" : "")}>
-                  <div className="container">
-                    {tab.component}
-                  </div>
-                </div>
-              </Fragment>
-            ))}
-          </div>
-
+      <div className="company">
+        <BreadCrumbs
+          crumbs={[{
+            name: name
+          }]}/>
+        <CompanyHeader
+          name={name}
+          status={status}
+          activeTab={activeTab}
+          tabs={tabs.map(x => x.nav)}
+          onTabSelected={this.changeTab}/>
+        <div className="company__tabs">
+          {tabs.map(tab => (
+            <div
+              key={tab.nav.id}
+              className={"company__tab" + (activeTab === tab.nav.id ? " is-active" : "")}>
+              <div className="container">
+                {tab.component}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     )

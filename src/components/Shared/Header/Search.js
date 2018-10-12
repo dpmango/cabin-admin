@@ -17,7 +17,7 @@ class Search extends Component {
     this.state = {
       searchValue: '',
       suggestions: this.suggestionsFakeApi,
-      showSuggestions: true, // TODO - remove on testing
+      showSuggestions: false, // TODO - remove on testing
       showAdvanced: false
     }
 
