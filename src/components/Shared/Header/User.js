@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import Image from 'components/Helpers/Image';
 import Dropdown from 'components/Interface/DropDown';
 import {logOut} from 'actions/user';
@@ -15,10 +15,6 @@ class User extends Component{
         <Dropdown
           extraClass="header-user__toggle">
           <div className="dropdown__menu">
-            <Link
-              to="/account/settings"
-              className="dropdown__menu-item">Settings
-            </Link>
             <li
               onClick={this.props.logOut}
               className="dropdown__menu-item">Log Out</li>

@@ -8,10 +8,10 @@ class Notifications extends Component{
     super()
 
     this.fakeNotifications = [
-      {id: 1, content: "Verify ACRA statement for ACME Company LTE"},
-      {id: 2, content: "Verify Stakeholders for ACME Company LTE"},
-      {id: 3, content: "Verify ACRA statement for ACME Company LTE ACME Com"},
-      {id: 4, content: "Send yearly confirmation for ACME Company LTE"}
+      {id: 1, isUnread: true, content: "Verify ACRA statement for ACME Company LTE"},
+      {id: 2, isUnread: true, content: "Verify Stakeholders for ACME Company LTE"},
+      {id: 3, isUnread: true, content: "Verify ACRA statement for ACME Company LTE ACME Com"},
+      {id: 4, isUnread: true, content: "Send yearly confirmation for ACME Company LTE"}
     ]
 
     this.state = {
@@ -45,6 +45,9 @@ class Notifications extends Component{
               key={x.id}
               to={`/company/${x.id}`}
               className="dropdown__menu-item">
+              {x.isUnread &&
+                <span class="dropdown__unread-mark"></span>
+              }
               {x.content}
             </Link>
           ))}
