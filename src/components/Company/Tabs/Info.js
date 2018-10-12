@@ -3,7 +3,9 @@ import Formsy from 'formsy-react';
 import FormInput from 'components/Interface/FormInput';
 import 'airbnb-js-shims';
 import Select from 'react-select';
+import ReactTags from 'components/Interface/ReactTags/ReactTags';
 import {Row, Col} from '../Grid';
+import { countriesListAutocompleate, delimiters} from 'store/CountriesListAutoCompleate';
 
 class Info extends Component{
 
@@ -43,6 +45,39 @@ class Info extends Component{
     })
   }
 
+  // tags
+
+  // tags management
+  handleTagsDelete = (i, e, name) => {
+    this.setState({
+      ...this.state,
+      [name]: this.state[name].filter((tag, index) => index !== i),
+    });
+  }
+
+  handleTagsAddition = (tag, name) => {
+    this.setState(state => ({
+      ...this.state,
+      [name]: [
+        ...state[name], tag
+      ]
+    }));
+  }
+
+  handleTagsDrag = (tag, currPos, newPos, name) => {
+    const tags = [...this.state[name]];
+    const newTags = tags.slice();
+
+    newTags.splice(currPos, 1);
+    newTags.splice(newPos, 0, tag);
+
+    // re-render
+    this.setState({
+      ...this.state,
+      [name]: newTags
+    });
+  }
+
   render(){
 
     const defaultInputProps = (name, placeholder) => ({
@@ -62,24 +97,21 @@ class Info extends Component{
       options: this.mapArrToSelect(selectValues[name])
     })
 
+    const defaultTagProps = (name) => ({
+      tags: this.props.fields[name],
+      name: name,
+      suggestions: countriesListAutocompleate,
+      handleDelete: this.handleTagsDelete,
+      handleAddition: this.handleTagsAddition,
+      handleDrag: this.handleTagsDrag,
+      delimiters: delimiters,
+      autofocus: false,
+      placeholder: "Select countries"
+    })
+
     const selectValues = {
-      countriesCustomers: [
-        "A", "B"
-      ],
-      countriesSuppliers: [
-        "A", "B"
-      ],
-      countriesPaymentTo: [
-        "A", "B"
-      ],
-      countriesPaymentFrom: [
-        "A", "B"
-      ],
       paidUpCapital: [
         "Investment from local individual shareholder(s)"
-      ],
-      paidUpCapitalOrigin: [
-        "A", "B"
       ],
       relatedEntities: [
         "Yes", "No", "Not defined"
@@ -128,9 +160,10 @@ class Info extends Component{
           <Col>
             <div className="ui-group">
               <div className="ui-group__label">List of countries where the company's customers are located</div>
-              <Select
+              { /* <Select
                 {...defaultSelectProps("countriesCustomers")}
-                placeholder="Select countries" />
+                placeholder="Select countries" /> */ }
+              <ReactTags {...defaultTagProps("countriesCustomers")} />
             </div>
           </Col>
         </Row>
@@ -138,17 +171,13 @@ class Info extends Component{
           <Col>
             <div className="ui-group">
               <div className="ui-group__label">List of countries where the company's suppliers are located</div>
-              <Select
-                {...defaultSelectProps("countriesSuppliers")}
-                placeholder="Select countries" />
+              <ReactTags {...defaultTagProps("countriesSuppliers")} />
             </div>
           </Col>
           <Col>
             <div className="ui-group">
               <div className="ui-group__label">List of countries that the company is making payment to</div>
-              <Select
-                {...defaultSelectProps("countriesPaymentTo")}
-                placeholder="Select countries" />
+              <ReactTags {...defaultTagProps("countriesPaymentTo")} />
             </div>
           </Col>
         </Row>
@@ -156,9 +185,7 @@ class Info extends Component{
           <Col>
             <div className="ui-group">
               <div className="ui-group__label">List of countries that the company is receiving payment from</div>
-              <Select
-                {...defaultSelectProps("countriesPaymentFrom")}
-                placeholder="Select countries" />
+              <ReactTags {...defaultTagProps("countriesPaymentFrom")} />
             </div>
           </Col>
           <Col>
@@ -174,9 +201,7 @@ class Info extends Component{
           <Col>
             <div className="ui-group">
               <div className="ui-group__label">Country or countries of origin for paid-up capital</div>
-              <Select
-                {...defaultSelectProps("paidUpCapitalOrigin")}
-                placeholder="Select countries" />
+              <ReactTags {...defaultTagProps("paidUpCapitalOrigin")} />
             </div>
           </Col>
           <Col>
