@@ -27,6 +27,9 @@ class Dropdown extends Component{
 
   // so link click don't close the dropdown
   preventClickAbove = (e) => {
+    if ( this.props.hideOnMenuClick ){
+      this.hide()
+    }
     e.stopPropagation()
   }
 

@@ -57,7 +57,7 @@ class Admin extends Component{
 
       },
       shareholders: {
-        
+
       }
     }
   }
@@ -148,6 +148,7 @@ class Admin extends Component{
           }]}/>
         <CompanyHeader
           name={name}
+          companyId={companyId}
           status={status}
           activeTab={activeTab}
           tabs={tabs.map(x => x.nav)}

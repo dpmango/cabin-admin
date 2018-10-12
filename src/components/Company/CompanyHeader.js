@@ -21,12 +21,12 @@ class CompanyHeader extends Component {
   }
 
   render(){
-    const {name, status, tabs, activeTab} = this.props
+    const {name, companyId, status, tabs, activeTab} = this.props
     return(
       <div className="company__header company-header">
         <div className="container">
           <div className="company-header__info">
-            <div className="company-header__name">{name}</div>
+            <div className="company-header__name">{`${name} (${companyId})`}</div>
             <div className="company-header__status"><CompanyStatus el={this.renderStatus(status)} /></div>
           </div>
           <div className="company-header__tabs">
