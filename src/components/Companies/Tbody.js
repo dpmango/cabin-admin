@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import CompanyStatus from 'components/Shared/CompanyStatus';
+import CompanyStatus from 'components/Company/CompanyStatus';
 
 class Tbody extends Component{
 

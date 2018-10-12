@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import CompanyStatus from 'components/Shared/CompanyStatus';
+import CompanyStatus from 'components/Company/CompanyStatus';
 
 class CompanyHeader extends Component {
   renderStatus = (st) => {

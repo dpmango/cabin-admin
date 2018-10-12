@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Header from 'components/Shared/Header';
-import Footer from 'components/Shared/Footer';
+import History from 'components/Company/History';
 import CompanyAdmin from 'components/Company/Admin';
 
 class Company extends Component{
@@ -10,7 +10,8 @@ class Company extends Component{
         <Header />
         <CompanyAdmin
           companyId={this.props.match.params.id} />
-        <Footer />
+        <History
+          companyId={this.props.match.params.id} />
       </div>
     )
   }

@@ -1,17 +1,16 @@
 import React, {Component, Fragment} from 'react';
 import Formsy from 'formsy-react';
 import FormInput from 'components/Interface/FormInput';
+import 'airbnb-js-shims';
+import Select from 'react-select';
 
 class Overview extends Component{
   constructor(){
     super();
 
     this.category = "overview";
-
-    this.state = {
-
-    }
   }
+
   // FORM FUNCTIONS
   formInvalid = () => {
     this.setState({ formIsValid: false });
@@ -30,16 +29,34 @@ class Overview extends Component{
     }
   }
 
+  //input change
   handleChange = (e) => {
     let fieldName = e.target.name;
     let fleldVal = e.target.value;
-    this.props.onInputChange(fieldName, fieldName, this.category)
+    this.props.onInputChange(fieldName, fleldVal, this.category)
+  }
+
+  // select change
+  handleSelectChange = (name, e) => {
+    this.props.onSelectChange(name, e, this.category)
+  }
+
+  mapArrToSelect = (arr) => {
+    return arr.map( x => {
+      return { value: x, label: x }
+    })
   }
 
   render(){
-    const {shortName, UEN} = this.props;
+    const {shortName, UEN, corporateSecretary} = this.props;
     const defaultInputProps = {
       onChangeHandler: this.handleChange
+    }
+
+    const selectValues = {
+      corporateSecretary: [
+        "Yes", "No", "Not defined"
+      ]
     }
 
     return(
@@ -63,6 +80,21 @@ class Overview extends Component{
               name="UEN"
               placeholder=""
               value={UEN} />
+          </div>
+        </div>
+        <div className="company__row">
+          <div className="company__col">
+            <div className="ui-group">
+              <Select
+                name="corporateSecretary"
+                searchable={false}
+                autosize={false}
+                value={corporateSecretary}
+                onChange={this.handleSelectChange.bind(this, 'corporateSecretary')}
+                placeholder="Which industry are you in?"
+                options={this.mapArrToSelect(selectValues.corporateSecretary)}
+              />
+            </div>
           </div>
         </div>
 

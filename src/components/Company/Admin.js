@@ -1,10 +1,10 @@
 import React, {Component, Fragment} from 'react';
 import CompanyHeader from './CompanyHeader';
 import BreadCrumbs from './BreadCrumbs';
-import Overview from './Overview';
-import Info from './Info';
-import StakeHolders from './StakeHolders';
-import ShareHolders from './ShareHolders';
+import Overview from './Tabs/Overview';
+import Info from './Tabs/Info';
+import StakeHolders from './Tabs/StakeHolders';
+import ShareHolders from './Tabs/ShareHolders';
 
 class Admin extends Component{
   constructor(){
@@ -14,11 +14,10 @@ class Admin extends Component{
       activeTab: 1,
       name: "ACME Company LTE",
       status: "pending",
-      fields: {
-        overview: {
-          shortName: "",
-          UEN: ""
-        }
+      overview: {
+        shortName: "",
+        UEN: "",
+        corporateSecretary: ""
       }
     }
   }
@@ -39,23 +38,33 @@ class Admin extends Component{
 
   // child component change functions
   handleChange = (name, value, cat) => {
-
     this.setState({...this.state,
-      fields: {...this.state.fields,
-        [cat]: {
-          ...this.state.fields[cat],
-          [name]: value
-        }
+      [cat]: {
+        ...this.state[cat],
+        [name]: value
       }
     })
-
   }
+
+  // onSelectChange = (name, value, cat) => {
+  //   this.setState({...this.state,
+  //     [cat]: {
+  //       ...this.state[cat],
+  //       [name]: value
+  //     }
+  //   })
+  // }
 
   render(){
     const {
       state: {name, status, activeTab},
       props: {companyId}
     } = this;
+
+    const defaultComponentProps = {
+      onInputChange: this.handleChange,
+      onSelectChange: this.handleChange
+    }
 
     const tabs = [
       {
@@ -64,9 +73,10 @@ class Admin extends Component{
           name: "Overview"
         },
         component: <Overview
-          shortName={this.state.fields.overview.shortName}
-          UEN={this.state.fields.overview.UEN}
-          onInputChange={this.handleChange} />
+          {...defaultComponentProps}
+          shortName={this.state.overview.shortName}
+          UEN={this.state.overview.UEN}
+          corporateSecretary={this.state.overview.corporateSecretary} />
       },
       {
         nav: {
