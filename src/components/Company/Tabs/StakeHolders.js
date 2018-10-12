@@ -9,13 +9,15 @@ class StakeHolders extends Component{
       shareholders_individulas: '',
       shareholders_corporate: ' '
     }
+
+    this.tableRef = [] // hold an array for tables scrollbars
   }
 
   // called from the parent onBlur or checkbox onClick
   updateState = (name, componentState) => {
     this.setState({ ...this.state,
       [name]: componentState
-    })
+    });
   }
 
   render(){
@@ -39,12 +41,15 @@ class StakeHolders extends Component{
           name: "Email"
         },
         {
+          icon: "sh-person",
+          name: "Singapore Citizen / PR"
+        },
+        {
           name: "Shareholder?"
         },
         {
           name: "Director?"
         }
-
       ],
       tbody: [
         {
@@ -69,6 +74,10 @@ class StakeHolders extends Component{
         },
         {
           type: "checkbox",
+          name: "is_sg_citizen"
+        },
+        {
+          type: "checkbox",
           name: "is_shareholder"
         },
         {
@@ -79,6 +88,19 @@ class StakeHolders extends Component{
     }
 
     const corporatesTable = {
+      topRow: [
+        {}, {},
+        {
+          colspan: 4,
+          icon: "sh-person",
+          name: "Corporate representative"
+        },
+        {
+          icon: "sh-person",
+          name: "Administrative Assistant",
+          tooltip: "Let us know if you prefer us to forward the onboarding paperwork for the Corporate Representative to be completed by an Administrative Assistant. The Corporate Representative will only need to verify and sign-off the completed onboarding documents."
+        }
+      ],
       thead: [
         {
           icon: "sh-name",
@@ -86,19 +108,28 @@ class StakeHolders extends Component{
         },
         {
           icon: "sh-id",
-          name: "UEN"
+          name: "Company registration #"
         },
         {
           icon: "sh-person",
-          name: "Name of corporate representative"
+          name: "Full name"
         },
         {
-          name: "Shareholder?"
+          icon: "sh-id",
+          name: "Id"
         },
         {
-          name: "Director?"
-        }
-
+          icon: "sh-phone",
+          name: "Phone number"
+        },
+        {
+          icon: "sh-email",
+          name: "Email"
+        },
+        {
+          icon: "sh-email",
+          name: "Email"
+        },
       ],
       tbody: [
         {
@@ -108,36 +139,56 @@ class StakeHolders extends Component{
         },
         {
           type: "input",
-          placeholder: "UEN",
+          placeholder: "Company registration #",
           name: "uen"
         },
         {
           type: "input",
-          placeholder: "Corporate representative",
-          name: "corporate_representative"
+          placeholder: "Insert full name",
+          name: "full_name"
         },
         {
-          type: "checkbox",
-          name: "is_shareholder"
+          type: "input",
+          placeholder: "ID",
+          name: "id"
         },
         {
-          type: "checkbox",
-          name: "is_director"
+          type: "input",
+          placeholder: "Phone number",
+          name: "phone"
+        },
+        {
+          type: "input",
+          placeholder: "E-mail",
+          name: "email"
+        },
+        {
+          type: "input",
+          placeholder: "E-mail",
+          name: "rep_email"
         }
       ]
     }
 
+
+
     return(
       <Fragment>
         <ShareholderTable
-          title="List of key individuals (shareholders and directors)"
-          schema={individualsTable}
-          updateState={this.updateState.bind(this, "shareholders_individulas")} />
+          onRef={(ref) => { this.tableRef[1] = ref; }}
+          title="List of all non-corporate stakeholder(s) (shareholders and directors)"
+          addMoreText="Additional stakeholders"
+          schema={corporatesTable}
+          updateState={this.updateState.bind(this, "shareholders_corporate")}
+        />
 
         <ShareholderTable
-          title="List of relevant corporate entities (i.e. corporate shareholders or directors)"
-          schema={corporatesTable}
-          updateState={this.updateState.bind(this, "shareholders_corporate")} />
+          onRef={(ref) => { this.tableRef[0] = ref; }}
+          title="List of corporate shareholder(s)"
+          addMoreText="Additional corporate entity"
+          schema={individualsTable}
+          updateState={this.updateState.bind(this, "shareholders_individulas")}
+        />
       </Fragment>
     )
   }

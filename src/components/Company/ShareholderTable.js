@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import PerfectScrollbar from 'react-perfect-scrollbar'
 import SvgIcon from 'components/Helpers/SvgIcon';
 import CheckBox from 'components/Interface/CheckBox';
+
 class ShareholderTable extends Component {
 
   constructor(props){
@@ -16,7 +18,19 @@ class ShareholderTable extends Component {
         })
       ]
     }
+
+    this._scrollBarRefTable = React.createRef();
+
   }
+
+  componentDidMount() {
+    this.props.onRef(this)
+  }
+  componentWillUnmount() {
+    this.props.onRef(undefined)
+  }
+
+  // input functiuons
 
   handleChange = (e, rowIndex, type, placeholder) => {
     let fieldName = e.target.name;
@@ -45,6 +59,7 @@ class ShareholderTable extends Component {
 
   }
 
+  // checkbox options
   chooseOption = (name, rowIndex, type, placeholder) => {
 
     let cellIndex = -1
@@ -75,7 +90,7 @@ class ShareholderTable extends Component {
 
   }
 
-
+  // new line
   addNewLine = () => {
     const stateClone = this.state.inputs_values;
     stateClone.push(
@@ -126,51 +141,74 @@ class ShareholderTable extends Component {
 
   }
 
+  // scrollbar functions
+  updateScrollbar = () => {
+    this._scrollBarRef.updateScroll()
+  }
+
   render(){
 
-    const { schema, title } = this.props;
-    const { inputs_values } = this.state
+    const {
+      props: {schema, title, addMoreText },
+      state: { inputs_values }
+    } = this
 
     return(
       <div className="sh-table">
         <div className="sh-table__title">
           {title}
         </div>
-        <div className="sh-table__wrapper">
+        <PerfectScrollbar
+          ref={(ref) => { this._scrollBarRef = ref; }}
+          className="sh-table__wrapper" >
+        {/* <div className="sh-table__wrapper"> */}
           <table>
             <thead>
-              <tr>
-                {schema.thead.map( (td, i) => {
-                  return(
-                    <td key={i}>
+              {
+                schema.topRow &&
+                <tr class="sh-table__top">
+                  {schema.topRow.map( (td, i) => (
+                    <td
+                      colspan={td.colspan ? td.colspan : null}
+                      key={i}>
                       { td.icon &&
                         <SvgIcon name={td.icon} />
                       }
-                      <span>{ td.name }</span>
+                      <span>
+                        { td.name }
+                      </span>
                     </td>
-                  )
-                })}
+                  ))}
+                </tr>
+              }
+              <tr>
+                {schema.thead.map( (td, i) => (
+                  <td key={i}>
+                    { td.icon &&
+                      <SvgIcon name={td.icon} />
+                    }
+                    <span>{ td.name }</span>
+                  </td>
+                ))}
               </tr>
             </thead>
             <tbody>
-              {inputs_values.map((tr,i) => {
-                  return(
-                    <tr key={i}>
-                      {tr.map( (td,index) => {
-                        return(
-                          <td key={index}>{this.renderInputComponenet(td, i, index)}</td>
-                        )
-                      })}
-                    </tr>
-                  )
-                }
-              )}
+              {inputs_values.map((tr,i) => (
+                <tr key={i}>
+                  {tr.map( (td,index) => {
+                    return(
+                      <td key={index}>{this.renderInputComponenet(td, i, index)}</td>
+                    )
+                  })}
+                </tr>
+              ))}
 
             </tbody>
           </table>
-          <div className="sh-table__add" onClick={this.addNewLine}>+ Add Additional Individuals</div>
-
-        </div>
+          <div
+            className="sh-table__add"
+            onClick={this.addNewLine}>+ {addMoreText}</div>
+        </PerfectScrollbar>
       </div>
     )
   }
