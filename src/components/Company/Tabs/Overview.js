@@ -6,11 +6,6 @@ import Select from 'react-select';
 import {Row, Col} from '../Grid';
 
 class Overview extends Component{
-  constructor(){
-    super();
-
-    this.category = "overview";
-  }
 
   // FORM FUNCTIONS
   formInvalid = () => {
@@ -25,7 +20,7 @@ class Overview extends Component{
   handleSubmit = (e) => {
     this.setState({isFormSubmitted: true})
     if ( this.state.formIsValid ){
-      this.props.onFormSave(this.category)
+      this.props.onFormSave(this.props.group)
       this.setState({isFormSubmitted: false}) // reset state here
     }
   }
@@ -34,12 +29,12 @@ class Overview extends Component{
   handleChange = (e) => {
     let fieldName = e.target.name;
     let fleldVal = e.target.value;
-    this.props.onInputChange(fieldName, fleldVal, this.category)
+    this.props.onInputChange(fieldName, fleldVal, this.props.group)
   }
 
   // select change
   handleSelectChange = (name, e) => {
-    this.props.onSelectChange(name, e, this.category)
+    this.props.onSelectChange(name, e, this.props.group)
   }
 
   mapArrToSelect = (arr) => {

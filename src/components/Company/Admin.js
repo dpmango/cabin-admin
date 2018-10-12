@@ -32,6 +32,32 @@ class Admin extends Component{
         representativeDesignation: "",
         representativeEmail: "",
         representativePhone: ""
+      },
+      info: {
+        companyName: "",
+        companyUEN: "",
+        registeredAddress: "",
+        incorporationDate: "",
+        businessActivity: "",
+        operatingAddress: "",
+        annualRevenue: "",
+        countriesCustomers: "",
+        countriesSuppliers: "",
+        countriesPaymentTo: "",
+        countriesPaymentFrom: "",
+        paidUpCapital: "",
+        paidUpCapitalOrigin: "",
+        relatedEntities: "",
+        otherBeneficiaries: "",
+        otherControllers: "",
+        otherBeneficiariesInput: "",
+        otherControllersInput: ""
+      },
+      stakeholders: {
+
+      },
+      shareholders: {
+        
       }
     }
   }
@@ -88,39 +114,31 @@ class Admin extends Component{
       onFormSave: this.saveForm,
       onInputChange: this.handleChange,
       onSelectChange: this.handleChange,
+      group: group,
       fields: this.state[group]
     })
 
-    const tabs = [
-      {
-        nav: {
-          id: 1,
-          name: "Overview"
-        },
-        component: <Overview {...defaultComponentProps("overview")} />
+    const tabs = [{
+      nav: {
+        id: 1, name: "Overview"
       },
-      {
-        nav: {
-          id: 2,
-          name: "Company info"
-        },
-        component: Info
+      component: <Overview {...defaultComponentProps("overview")} />
+    }, {
+      nav: {
+        id: 2, name: "Company info"
       },
-      {
-        nav: {
-          id: 3,
-          name: "Stakeholders info"
-        },
-        component: StakeHolders
+      component: <Info {...defaultComponentProps("info")} />
+    }, {
+      nav: {
+        id: 3, name: "Stakeholders info"
       },
-      {
-        nav: {
-          id: 4,
-          name: "Shareholding Structure"
-        },
-        component: ShareHolders
-      }
-    ]
+      component: <StakeHolders {...defaultComponentProps("stakeholders")} />
+    }, {
+      nav: {
+        id: 4, name: "Shareholding Structure"
+      },
+      component: <ShareHolders {...defaultComponentProps("shareholders")} />
+    }]
 
     return(
       <div className="company">

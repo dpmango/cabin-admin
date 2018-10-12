@@ -17,10 +17,10 @@ class BreadCrumbs extends Component{
             {crumbs.map((x, i) => {
               // reuturn link free is last item
               if ( i === crumbs.length - 1 )
-                return <li>{x.name}</li>
+                return <li key={i}>{x.name}</li>
 
               return(
-                <li>
+                <li key={i}>
                   <Link to={x.link}>{x.name}</Link>
                   <SvgIcon name="arrow-right" />
                 </li>
