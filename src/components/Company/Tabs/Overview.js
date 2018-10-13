@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import Formsy from 'formsy-react';
 import FormInput from 'components/Interface/FormInput';
 import 'airbnb-js-shims';
@@ -20,7 +20,7 @@ class Overview extends Component{
   handleSubmit = (e) => {
     this.setState({isFormSubmitted: true})
     if ( this.state.formIsValid ){
-      this.props.onFormSave(this.props.group)
+      this.props.onFormSave()
       this.setState({isFormSubmitted: false}) // reset state here
     }
   }
@@ -84,15 +84,15 @@ class Overview extends Component{
         onInvalid={this.formInvalid} >
         <Row>
           <Col>
-            <FormInput {...defaultInputProps("shortName", "Short name")} />
+            <FormInput zIndex={1} {...defaultInputProps("shortName", "Short name")} />
           </Col>
           <Col>
-            <FormInput {...defaultInputProps("UEN", "Company Code")} />
+            <FormInput zIndex={2} {...defaultInputProps("UEN", "Company Code")} />
           </Col>
         </Row>
         <Row>
           <Col>
-            <div className="ui-group">
+            <div className="ui-group" style={{zIndex: 100 - 3}}>
               <div className="ui-group__label">Corporate Secretary</div>
               <Select
                 {...defaultSelectProps("corporateSecretary")}
@@ -100,7 +100,7 @@ class Overview extends Component{
             </div>
           </Col>
           <Col>
-            <div className="ui-group">
+            <div className="ui-group" style={{zIndex: 100 - 4}}>
               <div className="ui-group__label">Accounting</div>
               <Select
                 {...defaultSelectProps("accountingType")}
@@ -110,15 +110,15 @@ class Overview extends Component{
         </Row>
         <Row>
           <Col>
-            <FormInput {...defaultInputProps("secretaryName", "Company Secretary name")} />
+            <FormInput zIndex={5} {...defaultInputProps("secretaryName", "Company Secretary name")} />
           </Col>
           <Col>
-            <FormInput {...defaultInputProps("secretaryid", "ompany Secretary ID")} />
+            <FormInput zIndex={6} {...defaultInputProps("secretaryid", "Company Secretary ID")} />
           </Col>
         </Row>
         <Row>
           <Col>
-            <div className="ui-group">
+            <div className="ui-group" style={{zIndex: 100 - 7}}>
               <div className="ui-group__label">Status</div>
               <Select
                 {...defaultSelectProps("status")}
@@ -126,7 +126,7 @@ class Overview extends Component{
             </div>
           </Col>
           <Col>
-            <div className="ui-group">
+            <div className="ui-group" style={{zIndex: 100 - 8}}>
               <div className="ui-group__label">Action Needed</div>
               <Select
                 {...defaultSelectProps("actionNeeded")}
@@ -135,38 +135,39 @@ class Overview extends Component{
           </Col>
         </Row>
         <FormInput
+          zIndex={9}
           {...defaultInputProps("notes", "Notes")}
           type="textarea" />
         <Row>
           <Col>
-            <FormInput {...defaultInputProps("addressLine1", "Company address line 1")} />
+            <FormInput zIndex={10} {...defaultInputProps("addressLine1", "Company address line 1")} />
           </Col>
           <Col>
-            <FormInput {...defaultInputProps("addressLine2", "Company address line 2")} />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <FormInput {...defaultInputProps("addressPostal", "Company address postal code")} />
-          </Col>
-          <Col>
-            <FormInput {...defaultInputProps("representativeName", "Company representative name")} />
+            <FormInput zIndex={11} {...defaultInputProps("addressLine2", "Company address line 2")} />
           </Col>
         </Row>
         <Row>
           <Col>
-            <FormInput {...defaultInputProps("representativeId", "Company representative ID")} />
+            <FormInput zIndex={12} {...defaultInputProps("addressPostal", "Company address postal code")} />
           </Col>
           <Col>
-            <FormInput {...defaultInputProps("representativeDesignation", "Company representative designation")} />
+            <FormInput zIndex={13} {...defaultInputProps("representativeName", "Company representative name")} />
           </Col>
         </Row>
         <Row>
           <Col>
-            <FormInput {...defaultInputProps("representativeEmail", "Company representative email")} />
+            <FormInput zIndex={14} {...defaultInputProps("representativeId", "Company representative ID")} />
           </Col>
           <Col>
-            <FormInput {...defaultInputProps("representativePhone", "Company representative contact number")} />
+            <FormInput zIndex={15} {...defaultInputProps("representativeDesignation", "Company representative designation")} />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <FormInput zindex={16} {...defaultInputProps("representativeEmail", "Company representative email")} />
+          </Col>
+          <Col>
+            <FormInput zIndex={17} {...defaultInputProps("representativePhone", "Company representative contact number")} />
           </Col>
         </Row>
         <div className="company__cta">

@@ -1,4 +1,4 @@
-import api from 'services/Api';
+// import api from 'services/Api';
 
 export const AUTHORIZATION_REQUEST = 'AUTHORIZATION_REQUEST';
 export const AUTHORIZATION_SUCCESS = 'AUTHORIZATION_SUCCESS';

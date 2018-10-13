@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import NotificationsSystem from 'reapop';
+import theme from 'reapop-theme-wybo';
 import RenderSwitch from './Switch';
 
 import svg4everybody from 'svg4everybody';
@@ -20,6 +22,7 @@ class App extends React.Component {
       <BrowserRouter>
         <div className="page">
           <div className="page__content">
+            <NotificationsSystem theme={theme} />
             <RenderSwitch/>
           </div>
         </div>

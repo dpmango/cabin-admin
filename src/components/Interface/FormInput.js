@@ -26,7 +26,7 @@ class FormInput extends Component {
   }
 
   render(){
-    const { name, id, placeholder, mask, label, rows, tooltipContent, extraClass } = this.props
+    const { name, id, placeholder, mask, label, rows, tooltipContent, extraClass, zIndex } = this.props
 
     const type = this.props.type ? this.props.type : "text"
 
@@ -37,7 +37,9 @@ class FormInput extends Component {
 
     if ( mask ){
       return (
-        <div className={parentClass}>
+        <div
+          style={zIndex ? {zIndex: 100 - zIndex} : null}
+          className={parentClass}>
           <MaskedInput
             type={type}
             mask={mask}
@@ -53,7 +55,9 @@ class FormInput extends Component {
       )
     } else {
       return(
-        <div className={parentClass}>
+        <div
+          style={zIndex ? {zIndex: 100 - zIndex} : null}
+          className={parentClass}>
           {label &&
             <label className="ui-group__label" htmlFor={name}>{label}</label>
           }

@@ -14,9 +14,9 @@ class History extends Component{
   }
 
   getHistory = () => {
-    const {
-      props: {companyId}
-    } = this;
+    // const {
+    //   props: {companyId}
+    // } = this;
 
     this.setState({
       history: [

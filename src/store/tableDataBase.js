@@ -1,54 +1,45 @@
 const tableDataBase = {
-  thead: [
-    {
+  thead: [{
       id: 1,
       name: 'Company name',
       icon: 't-cname',
       sortable: true
-    },
-    {
+    }, {
       id: 2,
       name: 'UEN',
       icon: 't-uen',
       sortable: false
-    },
-    {
+    }, {
       id: 3,
       name: 'Next FYE',
       icon: 't-clock',
       sortable: true
-    },
-    {
+    }, {
       id: 4,
       name: 'Next AGM',
       icon: 't-clock',
       sortable: true
-    },
-    {
+    }, {
       id: 5,
       name: 'Renewal',
       icon: 't-clock',
       sortable: true
-    },
-    {
+    }, {
       id: 6,
       name: 'Corp sec',
       icon: 't-user',
       sortable: false
-    },
-    {
+    }, {
       id: 7,
       name: 'Accounting',
       icon: 't-calendar',
       sortable: false
-    },
-    {
+    }, {
       id: 8,
       name: 'Status',
       icon: 't-status',
       sortable: true
-    },
-    {
+    }, {
       id: 9,
       name: 'Action needed',
       icon: 't-pencil',

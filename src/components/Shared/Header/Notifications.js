@@ -46,7 +46,7 @@ class Notifications extends Component{
               to={`/company/${x.id}`}
               className="dropdown__menu-item">
               {x.isUnread &&
-                <span class="dropdown__unread-mark"></span>
+                <span className="dropdown__unread-mark"></span>
               }
               {x.content}
             </Link>

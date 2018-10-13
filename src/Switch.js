@@ -9,10 +9,7 @@ class RenderSwitch extends React.Component {
 
   }
   componentDidUpdate(prevProps) {
-    const curPathSplit = this.props.location.pathname.split('/');
-    const prevPathSplit = prevProps.location.pathname.split('/');
-
-    // disallow transition when switching between the tabs
+    // when new page is triggered - scroll to top
     if (this.props.location.pathname !== prevProps.location.pathname) {
       ScrollTo(0, 300);
     }

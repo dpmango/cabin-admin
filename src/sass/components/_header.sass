@@ -3,12 +3,14 @@
   top: 0
   left: 0
   right: 0
-  z-index: 9
+  z-index: 999
   background: white
+  transition: .25s $ease
   &__wrapper
     display: flex
     align-items: center
     padding: 20px 0 10px
+    transition: .25s $ease
 
   &__logo
     flex: 0 0 auto
@@ -28,7 +30,13 @@
   &__user
     margin-left: 35px
 
+  &.is-scrolled
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.05)
+    .header__wrapper
+      padding-top: 10px
 
+
+// NOTIFICATIONS
 .header-ntf
   display: flex
   align-items: center
@@ -44,7 +52,7 @@
   .dropdown__hidden
     min-width: 435px
 
-
+// USER
 .header-user
   position: relative
   display: flex
