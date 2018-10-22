@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 import { notify } from 'reapop';
+import moment from 'moment';
 import api from 'services/Api';
 import PrettyJson from 'components/Helpers/PrettyJson';
 import CompanyHeader from './CompanyHeader';
@@ -21,15 +22,17 @@ class Admin extends Component{
       responce: null, // testing pruposes only
       activeTab: 1,
       name: "",
-      status: null, // default
       overview: {
+        dateFYE: null, // date select is also null or object
+        dateAGM: null,
+        dateRenewal: null,
         shortName: "",
         UEN: "",
         corporateSecretary: "",
         accountingType: "",
         secretaryName: "",
         secretaryid: "",
-        status: "",
+        status: null,
         actionNeeded: "",
         notes: "",
         addressLine1: "",
@@ -86,12 +89,15 @@ class Admin extends Component{
     api
       .get(`onboardings/${companyId}`)
       .then(res => {
+        console.log(`onboardings/${companyId} responce`, res )
         // res.data
         this.setState({
           responce: res.data, // testing obj holding all data
           name: res.data.company_name,
-          status: res.data.a_status,
           overview: {
+            dateFYE: res.data.a_date_fye && moment(res.data.a_date_fye),
+            dateAGM: res.data.a_date_agm && moment(res.data.a_date_agm),
+            dateRenewal: res.data.a_date_renewal && moment(res.data.a_date_renewal),
             shortName: res.data.a_shortname,
             UEN: res.data.a_companycode,
             corporateSecretary: res.data.a_corpsecretary,
@@ -135,11 +141,10 @@ class Admin extends Component{
             otherControllersInput: ""
           },
           stakeholders: {
-
+            shareholders_individulas: res.data.shareholders_individulas_array,
+            shareholders_corporate: res.data.shareholders_corporate_array
           },
-          shareholders: {
-
-          }
+          shareholders: {}
         })
       })
       .catch(err => {
@@ -199,8 +204,10 @@ class Admin extends Component{
       onboarding: {
         id: companyId,
         company_name: this.state.name,
-        a_status: this.state.status,
         //overview section
+        a_date_fye: this.state.overview.dateFYE,
+        a_date_agm: this.state.overview.dateAGM,
+        a_date_renewal: this.state.overview.dateRenewal,
         a_shortname: this.state.overview.shortName,
         a_companycode: this.state.overview.UEN,
         a_corpsecretary: this.state.overview.corporateSecretary,
@@ -240,9 +247,9 @@ class Admin extends Component{
         //   otherBeneficiariesInput: "",
         //   otherControllersInput: ""
         // },
-        // stakeholders: {
-        //
-        // },
+        // stakeholders section
+        shareholders_individulas_array: this.state.stakeholders.shareholders_individulas,
+        shareholders_corporate_array: this.state.stakeholders.shareholders_corporate
         // shareholders: {
         //
         // }
@@ -280,7 +287,7 @@ class Admin extends Component{
 
   render(){
     const {
-      state: {notFound, name, status, activeTab, responce},
+      state: {notFound, name, activeTab, responce},
       props: {companyId}
     } = this;
 
@@ -289,6 +296,7 @@ class Admin extends Component{
       onFormSave: this.saveForm,
       onInputChange: this.handleChange,
       onSelectChange: this.handleChange,
+      onDatePickerChange: this.handleChange,
       group: group,
       fields: this.state[group]
     })
@@ -330,7 +338,7 @@ class Admin extends Component{
           }]}/>
         <CompanyHeader
           name={name}
-          status={status}
+          status={this.state.overview.status}
           activeTab={activeTab}
           tabs={tabs.map(x => x.nav)}
           onTabSelected={this.changeTab}/>

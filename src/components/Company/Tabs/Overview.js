@@ -3,9 +3,19 @@ import Formsy from 'formsy-react';
 import FormInput from 'components/Interface/FormInput';
 import 'airbnb-js-shims';
 import Select from 'react-select';
+import 'react-dates/initialize';
+import { SingleDatePicker } from 'react-dates';
 import {Row, Col} from '../Grid';
+import SvgIcon from 'components/Helpers/SvgIcon';
 
 class Overview extends Component{
+  constructor(){
+    super()
+
+    this.state = {
+      focuses: {} // store all datepicker focus states
+    }
+  }
 
   // FORM FUNCTIONS
   formInvalid = () => {
@@ -34,7 +44,21 @@ class Overview extends Component{
 
   // select change
   handleSelectChange = (name, e) => {
-    this.props.onSelectChange(name, e, this.props.group)
+    // set only value key pair to both state and api
+    this.props.onSelectChange(name, e && e.value, this.props.group)
+  }
+
+  // date change
+  handleDateChange = (name, val) => {
+    // somehow on saving/setting state and api, only _d momemnt value is stored to db
+    this.props.onDatePickerChange(name, val, this.props.group)
+  }
+
+  datepickerFocuschange = (name, e) => {
+    this.setState({
+      ...this.state,
+      focuses: {...this.state.focuses, [name]: e.focused}
+    })
   }
 
   mapArrToSelect = (arr) => {
@@ -62,15 +86,35 @@ class Overview extends Component{
       options: this.mapArrToSelect(selectValues[name])
     })
 
+    const defaultDatepickerProps = (name) => ({
+      date: this.props.fields[name],
+      onDateChange: this.handleDateChange.bind(this, name),
+      focused: this.state.focuses[name],
+      placeholder: "Select date",
+      noBorder: true,
+      block: true,
+      hideKeyboardShortcutsPanel: true,
+      customInputIcon: <SvgIcon name="select-arrow" />,
+      inputIconPosition: "after",
+      displayFormat: "DD/MM/YYYY",
+      anchorDirection: "left",
+      numberOfMonths: 1,
+      horizontalMargin: 0,
+      id: name,
+      onFocusChange: this.datepickerFocuschange.bind(this, name)
+    })
+
     const selectValues = {
       corporateSecretary: [
         "Yes", "No", "Not defined"
       ],
       accountingType: [
-        "Monthly"
+        "Monthly", "Yearly"
       ],
       status: [
-        "Pending", "Active", "Inactive"
+        {value: 1, label: "Pending"},
+        {value: 2, label: "Active"},
+        {value: 3, label: "Inactive"}
       ],
       actionNeeded: [
         "Action 1", "Action 2"
@@ -122,8 +166,10 @@ class Overview extends Component{
               <div className="ui-group__label">Status</div>
               <Select
                 {...defaultSelectProps("status")}
+                options={selectValues["status"]}
                 placeholder="Status" />
             </div>
+
           </Col>
           <Col>
             <div className="ui-group" style={{zIndex: 100 - 8}}>
@@ -168,6 +214,34 @@ class Overview extends Component{
           </Col>
           <Col>
             <FormInput zIndex={17} {...defaultInputProps("representativePhone", "Company representative contact number")} />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div className="ui-group" style={{zIndex: 100 - 18}}>
+              <div className="ui-group__label">Date - FYE</div>
+              <div className={ this.state.focuses.dateFYE ? 'is-focused' : '' }>
+                <SingleDatePicker {...defaultDatepickerProps("dateFYE")} />
+              </div>
+            </div>
+          </Col>
+          <Col>
+            <div className="ui-group" style={{zIndex: 100 - 19}}>
+              <div className="ui-group__label">Date - AGM</div>
+              <div className={ this.state.focuses.dateAGM ? 'is-focused' : '' }>
+                <SingleDatePicker {...defaultDatepickerProps("dateAGM")} />
+              </div>
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div className="ui-group" style={{zIndex: 100 - 20}}>
+              <div className="ui-group__label">Date - renewal</div>
+              <div className={ this.state.focuses.dateRenewal ? 'is-focused' : '' }>
+                <SingleDatePicker {...defaultDatepickerProps("dateRenewal")} />
+              </div>
+            </div>
           </Col>
         </Row>
         <div className="company__cta">

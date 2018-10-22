@@ -61,9 +61,9 @@ class Table extends Component{
       cells: [
         {id: 1, text: x.company_name}, // Company name
         {id: 2, text: x.company_uen}, // UEN
-        {id: 3, text: moment("27/03/2017", "DD/MM/YYYY")}, // Fiscal Year End TODO
-        {id: 4, text: moment("27/05/2017", "DD/MM/YYYY")},  // annual general meeting TODO
-        {id: 5, text: moment("27/03/2018", "DD/MM/YYYY")}, // Renewal TODO
+        {id: 3, text: x.a_date_fye && moment(x.a_date_fye)}, // Fiscal Year End
+        {id: 4, text: x.a_date_agm && moment(x.a_date_agm)},  // annual general meeting
+        {id: 5, text: x.a_date_renewal && moment(x.a_date_renewal)}, // Renewal
         {id: 6, text: x.a_corpsecretary}, // Corporate secretary
         {id: 7, text: x.a_accounting}, // Accounting
         {id: 8, text: x.a_status}, // Status - default 1, [1,2,3]
